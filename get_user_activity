@@ -1,0 +1,7 @@
+AzureActivity
+| where TimeGenerated > ago(180d) 
+| where Caller == "<UPN>"
+| where SubscriptionId == "<SubscriptionId>"
+// filter on service type
+// | where OperationNameValue !contains "MICROSOFT.WEB/SITES"
+| project TimeGenerated, OperationNameValue, Caller, SubscriptionId
