@@ -1,0 +1,5 @@
+AuditLogs
+| where TimeGenerated >= ago(45d)
+| where LoggedByService has 'PIM'
+| where InitiatedBy has '<UPN>'
+| where TargetResources has '<role_name>'

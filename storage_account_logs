@@ -1,0 +1,16 @@
+// StorageFileLogs
+// StorageTableLogs
+// StorageQueueLogs
+StorageBlobLogs
+| where TimeGenerated >= ago(30d)
+// | where CallerIpAddress !startswith "10."
+// | where CallerIpAddress !startswith "172.16"
+// | where CallerIpAddress !startswith "192.168"
+// | where AuthenticationType == "Anonymous"
+// | where AuthenticationType == "AnonymousPreflight"
+| where AccountName == "<sa_name>"
+| parse CallerIpAddress with SourceIpAddress ':' *
+// | summarize count() by SourceIpAddress
+// | sort by SourceIpAddress
+// | where SourceIpAddress contains "10.0.15.93"
+| project TimeGenerated, OperationName, AuthenticationType, StatusCode, StatusText, SourceIpAddress, ObjectKey
