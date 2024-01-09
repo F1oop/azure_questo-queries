@@ -1,0 +1,8 @@
+AzureDiagnostics
+| where TimeGenerated >= ago(180d)
+| where _ResourceId has "<KeyVault name>"
+| parse ResourceId with * '/VAULTS/' KeyVaulyName
+// | summarize count() by CallerIPAddress
+// | sort by CallerIPAddress
+// | where CallerIPAddress == "195.34.187.34"
+| project TimeGenerated, KeyVaulyName, CallerIPAddress, OperationName, clientInfo_s
